@@ -18,7 +18,6 @@ export default function Main() {
 			setState({
 				announcements: data
 			});
-			console.log(state);
 		}
 	}
 
@@ -31,8 +30,8 @@ export default function Main() {
 			</Form>
 
 			<List>
-				{state.announcements.map((announcement, key) => (
-					<li key={announcement.key}>
+				{state.announcements.map((announcement) => (
+					<li key={announcement.id}>
 						<span>{announcement.modelo} </span>
 						<Link to={`/announcement/${announcement.id}`}>Detalhes</Link>
 					</li>
