@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { Container, Form, SubmitButton, List } from './styles';
+import React, { useState, useEffect } from 'react';
+import { List } from '../../Components/StyledComponents/StyledPage';
 import { Link } from 'react-router-dom';
 
-import announcementApi from '../../services/announcementApi';
+import { getAllForListing } from '../../services/announcementApi';
 
 export default function Main() {
 	const initialState = {
@@ -10,25 +10,25 @@ export default function Main() {
 	};
 	const [state, setState] = useState(initialState);
 
-	const handleSubmit = async e => {
-		e.preventDefault();
-		const { data } = await announcementApi.get();
-
-		if (data) {
-			setState({
-				announcements: data
-			});
-		}
+	const loadAnnouncements = async e => {
+		await getAllForListing()
+		.then(function(res) {
+			if (res) {
+				setState({announcements: res});
+			}
+		})
+		.catch(function(error) {
+			console.log(error);
+		});
 	}
 
+	useEffect(() => {
+		loadAnnouncements();
+	}, []);
+
 	return (
-		<Container>
-			<h1>Cadastro de automóveis</h1>
-
-			<Form onSubmit={handleSubmit}>
-				<SubmitButton>Listar</SubmitButton>
-			</Form>
-
+		<>
+			<h1>Veículos</h1>
 			<List>
 				{state.announcements.map((announcement) => (
 					<li key={announcement.id}>
@@ -37,6 +37,6 @@ export default function Main() {
 					</li>
 				))}
 			</List>
-		</Container>
+		</>
 	);
 }

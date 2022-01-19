@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router';
-import announcementApi from '../../services/announcementApi';
-import { Container, List } from './styles';
+import { useNavigate, useParams } from 'react-router';
+import { getById } from '../../services/announcementApi';
+import { List } from '../../Components/StyledComponents/StyledPage';
 
 
 export default function Announcement() {
 	const { id } = useParams();
-	const [announcement, setannouncement] = useState({});
+	const navigate = useNavigate();
+	const [announcement, setAnnouncement] = useState({});
 
 	const loadAnnouncement = async e => {
-		const { data } = await announcementApi.get(`/${id}`);
+		const data = await getById(id);
 		if (data) {
-			setannouncement(data);
+			setAnnouncement(data);
 		}
 	}
 
@@ -20,16 +21,22 @@ export default function Announcement() {
 	}, []);
 
 	return (
-		<Container>
+		<>
 			<h1>{announcement.modelo}</h1>
 			<List>
-				<li>Marca: {announcement.marca}</li>
-				<li>Cor: {announcement.cor}</li>
-				<li>Placa: {announcement.placa}</li>
-				<li>Localização: {announcement.localizacao}</li>
-				<li>Preço FIPE: {announcement.preco_fipe}</li>
-				<li>Preço Repasse: {announcement.preco}</li>
+				<li><span className="attribute-title">Marca:</span> {announcement.marca}</li>
+				<li><span className="attribute-title">Cor:</span> {announcement.cor}</li>
+				<li><span className="attribute-title">Portas:</span> {announcement.nro_portas}</li>
+				<li><span className="attribute-title">Placa:</span> {announcement.placa}</li>
+				<li><span className="attribute-title">Km:</span> {announcement.quilometragem}</li>
+				<li><span className="attribute-title">Ano Modelo:</span> {announcement.ano_modelo}</li>
+				<li><span className="attribute-title">Ano Fabricação:</span> {announcement.ano_fabricacao}</li>
+				<li><span className="attribute-title">Localização:</span> {announcement.localizacao}</li>
+				<li><span className="attribute-title">Preço FIPE:</span> {announcement.preco_fipe}</li>
+				<li><span className="attribute-title">Preço Repasse:</span> {announcement.preco}</li>
+				<li><span className="attribute-title">Situação:</span> {announcement.situacao}</li>
 			</List>
-		</Container>
+			<button onClick={() => navigate(-1)} className="btn back-btn">Voltar</button>
+		</>
 	);
 }
