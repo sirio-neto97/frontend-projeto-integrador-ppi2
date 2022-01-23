@@ -60,11 +60,7 @@ export default function CreateAnnouncement() {
 			'name': file.name,
 			'readebleSize': fileSize(file.size),
 			'preview': URL.createObjectURL(file),
-			'deleted': false,
-			'progress': 0,
-			'uploaded': false,
-			'error': false,
-			'url': null
+			'deleted': false
 		}));
 
 		setState({

@@ -50,29 +50,43 @@ export const Form = styled.form`
 `;
 
 export const List = styled.ul`
+	background: #f5f5ff;
+	border-radius: 8px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	list-style: none;
+	padding: 0 16px;
+	width: 100%;
+
 	li {
 		color: #383a59;
 		font-family: sans-serif;
 		padding: 8px 16px;
-	}
-
-	width: 100%;
-	list-style: none;
-
-	li {
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
 		align-items: center;
+		text-align: center;
+		background: #fff;
+		margin: 8px 0;
+		border: 1px solid #fff;
+		border-radius: 8px;
 	}
 
-	a {
-		color: #383a59;
+	li.list-item:hover {
+		background: #f5f5ff;
+		border-color: #ccc;
+	}
+
+	.header-li {
+		background: #f5f5ff;
+		font-size: 18px;
+		border: 1px solid #f5f5ff;
 	}
 `;
 
 export const Actions = styled.div`
-	width: 25%;
 	display: flex;
 	justify-content: space-between;
 
@@ -80,6 +94,7 @@ export const Actions = styled.div`
 		text-decoration: none;
 		background: #383a59;
 		color: #fefefe;
+		cursor: pointer;
 		border: none;
 		border-radius: 4px;
 		padding: 4px 8px;

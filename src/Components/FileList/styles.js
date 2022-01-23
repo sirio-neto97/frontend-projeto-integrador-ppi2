@@ -2,15 +2,13 @@ import styled from 'styled-components';
 
 export const ImagesList = styled.ul`
 	margin-top: 20px;
+	display: flex;
 
 	li {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-	}
-
-	& + li {
-		margin-top: 16px;
+		width: 25%;
 	}
 `;
 
@@ -40,7 +38,7 @@ export const FileInfo = styled.div`
 		padding: 2px;
 		background : transparent;
 		color: #e57878;
-		margin-left: 5px;
+		margin-top: -59px;
 		cursor: pointer;
 		transition: 0.1s;
 	}
@@ -52,8 +50,9 @@ export const FileInfo = styled.div`
 `;
 
 export const Preview = styled.div`
-	width: 36px;
-	height: 36px;
+	width: 72px;
+	height: 72px;
+	border: 1px solid #ccc;
 	border-radius: 4px;
 	background-image: url(${props => props.src});
 	background-repeat: no-repeat;

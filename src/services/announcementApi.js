@@ -4,6 +4,10 @@ const announcementApi = axios.create({
 	baseURL: 'http://localhost:3000/announcements',
 });
 
+const filesApi = axios.create({
+	baseURL: 'http://localhost:3000/files',
+});
+
 export const getById = async function(announcementId) {
 	return await announcementApi.get(`/${announcementId}`)
 	.then(function(response) {
@@ -61,6 +65,21 @@ export const saveFiles = async (formData, announcementId) => {
 
 export const remove = async (announcementId) => {
 	return await announcementApi.delete(`/${announcementId}`)
+	.then(function(response) {
+		return response.data;
+	})
+	.catch(function(error) {
+		throw new Error(error);
+	});
+}
+
+export const deleteFiles = async (ids) => {
+	return await filesApi({
+		method: 'DELETE',
+		data: {
+			'ids': ids
+		}
+	})
 	.then(function(response) {
 		return response.data;
 	})

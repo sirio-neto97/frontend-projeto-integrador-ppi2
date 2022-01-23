@@ -12,6 +12,7 @@ export default function EditAnnouncement() {
 	const { id } = useParams();
 	const navigate = useNavigate();
 	const initialState = {
+		'id': 0,
 		'formInputs': {
 			'marca': 'A',
 			'modelo': 'A',
@@ -32,16 +33,18 @@ export default function EditAnnouncement() {
 
 	const handleSubmit = async function(e) {
 		e.preventDefault();
-		const result = await announcementApi.save(state);
-
-		if (result.error) {
-			alert(result.error);
-		}
-
-		return redirectToList();
+		await announcementApi.save(parseDataToSave(state))
+		.then(function(res) {
+			saveAnnouncementFiles(res.id, state.uploadedFiles);
+			return redirectBackPage();
+		})
+		.catch(function(error) {
+			alert(error);
+			return;
+		});
 	}
 
-	const redirectToList = function() {
+	const redirectBackPage = function() {
 		return navigate(-1);
 	}
 
@@ -60,13 +63,9 @@ export default function EditAnnouncement() {
 			'id': 0,
 			'file': file,
 			'key': uniqueId(),
-			'name': file.name,
 			'readebleSize': fileSize(file.size),
 			'preview': URL.createObjectURL(file),
 			'deleted': false,
-			'progress': 0,
-			'uploaded': false,
-			'error': false,
 			'url': null
 		}));
 
@@ -96,7 +95,6 @@ export default function EditAnnouncement() {
 			return;
 		}
 
-		debugger;
 		if (data) {
 			setState(parseDataFromApi(data));
 		}
@@ -104,6 +102,7 @@ export default function EditAnnouncement() {
 
 	const parseDataFromApi = function(data) {
 		return {
+			'id': data.id,
 			'formInputs': {
 				'marca': data.marca,
 				'modelo': data.modelo,
@@ -128,7 +127,7 @@ export default function EditAnnouncement() {
 				'id': file.id,
 				'key': uniqueId(),
 				'preview': file.path,
-				'deleted': false,
+				'deleted': false
 			}
 		});
 	}
@@ -137,6 +136,7 @@ export default function EditAnnouncement() {
 		const { formInputs } = data;
 
 		return {
+			'id': parseInt(data.id),
 			'marca': String(formInputs.marca),
 			'modelo': String(formInputs.modelo),
 			'cor': String(formInputs.cor),
@@ -156,18 +156,39 @@ export default function EditAnnouncement() {
 		id = id || 0;
 		uploadedFiles = uploadedFiles || [];
 
+		var idsToDelete = [];
 		const formData = new FormData();
 
 		for (let i = 0; i < uploadedFiles.length; i++) {
-			formData.append('files', uploadedFiles[i].file);
+			if (isNewFile(uploadedFiles[i])) {
+				formData.append('files', uploadedFiles[i].file);
+			} else if (isDeletedFile(uploadedFiles[i])) {
+				idsToDelete.push(uploadedFiles[i].id);
+			}
 		}
 
-		await announcementApi.saveFiles(formData, id);
+		if (formData) {
+			await announcementApi.saveFiles(formData, id);
+		}
+
+		if (idsToDelete.length) {
+			await announcementApi.deleteFiles(idsToDelete);
+		}
 	}
 
 	useEffect(() => {
 		loadAnnouncementData();
 	}, []);
+
+	const isNewFile = function (objFile) {
+		var fileId = parseInt(objFile.id);
+
+		return !fileId;
+	}
+
+	const isDeletedFile = function (objFile) {
+		return Boolean(objFile.deleted);
+	}
 
 	return(
 		<>
@@ -175,62 +196,62 @@ export default function EditAnnouncement() {
 			<Form onSubmit={handleSubmit}>
 			<div className="form-group w25">
 					<label htmlFor="marca">Marca</label>
-					<input type="text" name="marca" id="marca" value={state.marca} onChange={handleChange} required/>
+					<input type="text" name="marca" id="marca" value={state.formInputs.marca} onChange={handleChange} required/>
 				</div>
 
 				<div className="form-group w25">
 					<label htmlFor="modelo">Modelo</label>
-					<input type="text" name="modelo" id="modelo" value={state.modelo} onChange={handleChange} required/>
+					<input type="text" name="modelo" id="modelo" value={state.formInputs.modelo} onChange={handleChange} required/>
 				</div>
 
 				<div className="form-group w25">
 					<label htmlFor="cor">Cor</label>
-					<input type="text" name="cor" id="cor" value={state.cor} onChange={handleChange} required/>
+					<input type="text" name="cor" id="cor" value={state.formInputs.cor} onChange={handleChange} required/>
 				</div>
 
 				<div className="form-group w25">
 					<label htmlFor="placa">Placa</label>
-					<input type="text" name="placa" id="placa" value={state.placa} onChange={handleChange} required/>
+					<input type="text" name="placa" id="placa" value={state.formInputs.placa} onChange={handleChange} required/>
 				</div>
 
 				<div className="form-group w25">
 					<label htmlFor="localizacao">Localização</label>
-					<input type="text" name="localizacao" id="localizacao" value={state.localizacao} onChange={handleChange} required/>
+					<input type="text" name="localizacao" id="localizacao" value={state.formInputs.localizacao} onChange={handleChange} required/>
 				</div>
 
 				<div className="form-group w25">
 					<label htmlFor="preco">Preço</label>
-					<input type="text" name="preco" id="preco" value={state.preco} onChange={handleChange} required/>
+					<input type="text" name="preco" id="preco" value={state.formInputs.preco} onChange={handleChange} required/>
 				</div>
 
 				<div className="form-group w25">
 					<label htmlFor="preco_fipe">Preço FIPE</label>
-					<input type="text" name="preco_fipe" id="preco_fipe" value={state.preco_fipe} onChange={handleChange} required/>
+					<input type="text" name="preco_fipe" id="preco_fipe" value={state.formInputs.preco_fipe} onChange={handleChange} required/>
 				</div>
 
 				<div className="form-group w25">
 					<label htmlFor="quilometragem">Km</label>
-					<input type="number" name="quilometragem" id="quilometragem" value={state.quilometragem} onChange={handleChange} required/>
+					<input type="number" name="quilometragem" id="quilometragem" value={state.formInputs.quilometragem} onChange={handleChange} required/>
 				</div>
 
 				<div className="form-group w25">
 					<label htmlFor="ano_modelo">Ano Modelo</label>
-					<input type="number" name="ano_modelo" id="ano_modelo" value={state.ano_modelo} onChange={handleChange} required/>
+					<input type="number" name="ano_modelo" id="ano_modelo" value={state.formInputs.ano_modelo} onChange={handleChange} required/>
 				</div>
 
 				<div className="form-group w25">
 					<label htmlFor="ano_fabricacao">Ano Fabricação</label>
-					<input type="number" name="ano_fabricacao" id="ano_fabricacao" value={state.ano_fabricacao} onChange={handleChange} required/>
+					<input type="number" name="ano_fabricacao" id="ano_fabricacao" value={state.formInputs.ano_fabricacao} onChange={handleChange} required/>
 				</div>
 
 				<div className="form-group w25">
 					<label htmlFor="nro_portas">Número de Portas</label>
-					<input type="number" name="nro_portas" id="nro_portas" value={state.nro_portas} onChange={handleChange} required/>
+					<input type="number" name="nro_portas" id="nro_portas" value={state.formInputs.nro_portas} onChange={handleChange} required/>
 				</div>
 
 				<div className="form-group w25">
 					<label htmlFor="situacao">Situação</label>
-					<input type="text" name="situacao" id="situacao" value={state.situacao} onChange={handleChange} required/>
+					<input type="text" name="situacao" id="situacao" value={state.formInputs.situacao} onChange={handleChange} required/>
 				</div>
 				<div className="form-group w100">
 					<label>Imagens</label>

@@ -1,5 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-import 'react-circular-progressbar/dist/styles.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default createGlobalStyle`
 	* {
@@ -53,6 +53,14 @@ export default createGlobalStyle`
 
 	.form-group-btn {
 		padding: 0 8px;
+	}
+
+	.w10 {
+		width: 10%;
+	}
+
+	.w20 {
+		width: 20%;
 	}
 
 	.w25 {
