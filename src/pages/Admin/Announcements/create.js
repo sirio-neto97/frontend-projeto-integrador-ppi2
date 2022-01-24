@@ -190,8 +190,8 @@ export default function CreateAnnouncement() {
 				</div>
 
 				<div className="form-group-btn w50">
-					<button className="btn success-btn">Salvar</button>
-					<div onClick={() => navigate(-1)} className="btn back-btn">Voltar</div>
+					<button className="btn btn-success">Salvar</button>
+					<div onClick={() => navigate(-1)} className="btn btn-danger">Voltar</div>
 				</div>
 			</Form>
 		</>

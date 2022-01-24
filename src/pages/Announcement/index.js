@@ -36,7 +36,7 @@ export default function Announcement() {
 				<li><span className="attribute-title">Preço Repasse:</span> {announcement.preco}</li>
 				<li><span className="attribute-title">Situação:</span> {announcement.situacao}</li>
 			</List>
-			<button onClick={() => navigate(-1)} className="btn back-btn">Voltar</button>
+			<button onClick={() => navigate(-1)} className="btn btn-danger">Voltar</button>
 		</>
 	);
 }

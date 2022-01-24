@@ -12,35 +12,11 @@ export default createGlobalStyle`
 		background: #383a59;
 	}
 
-	.back-btn {
-		background: #e74c3c;
-		color: #fff;
-		border-radius: 4px;
-	}
-
-	.back-btn:hover {
-		background: rgba(161, 5, 5, 0.8);
-	}
-
-	.success-btn {
-		background: #32a852;
-		color: #fff;
-		border-radius: 4px;
-	}
-
-	.success-btn:hover {
-		background: rgba(34, 115, 56, 0.8);
-	}
-
 	.btn {
 		border: none;
-		font-size: inherit;
 		cursor: pointer;
 		padding: 16px 36px;
-		display: inline-block;
-		margin: 16px;
 		text-transform: uppercase;
-		text-decoration: none;
 		letter-spacing: 1px;
 		-webkit-transition: all 0.3s;
 		-moz-transition: all 0.3s;

@@ -73,6 +73,18 @@ export const remove = async (announcementId) => {
 	});
 }
 
+export const removeMass = async (aIds) => {
+	return await announcementApi.delete(``, {
+		data: {'ids': aIds}
+	})
+	.then(function(response) {
+		return response.data;
+	})
+	.catch(function(error) {
+		throw new Error(error);
+	});
+}
+
 export const deleteFiles = async (ids) => {
 	return await filesApi({
 		method: 'DELETE',

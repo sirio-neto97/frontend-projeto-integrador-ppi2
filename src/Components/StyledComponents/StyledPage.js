@@ -62,7 +62,6 @@ export const List = styled.ul`
 	li {
 		color: #383a59;
 		font-family: sans-serif;
-		padding: 8px 16px;
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
@@ -77,18 +76,20 @@ export const List = styled.ul`
 	li.list-item:hover {
 		background: #f5f5ff;
 		border-color: #ccc;
+		cursor: pointer;
 	}
 
 	.header-li {
 		background: #f5f5ff;
-		font-size: 18px;
 		border: 1px solid #f5f5ff;
 	}
 `;
 
-export const Actions = styled.div`
-	display: flex;
-	justify-content: space-between;
+export const ActionsMenu = styled.ul`
+	li {
+		display: block;
+
+	}
 
 	button, a {
 		text-decoration: none;

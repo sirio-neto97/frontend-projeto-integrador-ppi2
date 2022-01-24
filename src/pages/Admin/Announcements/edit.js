@@ -160,9 +160,9 @@ export default function EditAnnouncement() {
 		const formData = new FormData();
 
 		for (let i = 0; i < uploadedFiles.length; i++) {
-			if (isNewFile(uploadedFiles[i])) {
+			if (isFileToSave(uploadedFiles[i])) {
 				formData.append('files', uploadedFiles[i].file);
-			} else if (isDeletedFile(uploadedFiles[i])) {
+			} else if (isFileToDelete(uploadedFiles[i])) {
 				idsToDelete.push(uploadedFiles[i].id);
 			}
 		}
@@ -180,13 +180,13 @@ export default function EditAnnouncement() {
 		loadAnnouncementData();
 	}, []);
 
-	const isNewFile = function (objFile) {
+	const isFileToSave = function (objFile) {
 		var fileId = parseInt(objFile.id);
 
-		return !fileId;
+		return !fileId && !isFileToDelete(objFile);
 	}
 
-	const isDeletedFile = function (objFile) {
+	const isFileToDelete = function (objFile) {
 		return Boolean(objFile.deleted);
 	}
 
@@ -261,8 +261,8 @@ export default function EditAnnouncement() {
 					) }
 				</div>
 				<div className="form-group-btn w50">
-					<button className="btn success-btn">Salvar</button>
-					<div onClick={() => navigate(-1)} className="btn back-btn">Voltar</div>
+					<button className="btn btn-success me-3">Salvar</button>
+					<div onClick={() => navigate(-1)} className="btn btn-danger">Voltar</div>
 				</div>
 			</Form>
 		</>
