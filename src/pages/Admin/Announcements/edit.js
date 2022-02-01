@@ -155,19 +155,21 @@ export default function EditAnnouncement() {
 	const saveAnnouncementFiles = async function(id, uploadedFiles) {
 		id = id || 0;
 		uploadedFiles = uploadedFiles || [];
-
 		var idsToDelete = [];
+		var idsToSave = [];
+
 		const formData = new FormData();
 
 		for (let i = 0; i < uploadedFiles.length; i++) {
 			if (isFileToSave(uploadedFiles[i])) {
+				idsToSave.push(uploadedFiles[i].id);
 				formData.append('files', uploadedFiles[i].file);
 			} else if (isFileToDelete(uploadedFiles[i])) {
 				idsToDelete.push(uploadedFiles[i].id);
 			}
 		}
 
-		if (formData) {
+		if (idsToSave.length) {
 			await announcementApi.saveFiles(formData, id);
 		}
 

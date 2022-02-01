@@ -28,9 +28,6 @@ export default function Announcements() {
 					announcements: parseDataFromApi(res)
 				});
 			}
-		})
-		.catch(function(error) {
-			console.log(error);
 		});
 	}
 
@@ -45,33 +42,41 @@ export default function Announcements() {
 	}
 
 	const handleDelete = async function(id) {
-		const response = await announcementApi.remove(id);
-		const announcements = state.announcements.filter(function(ad) {
-			return ad.id !== id;
+		await announcementApi.remove(id)
+		.then(function(res) {
+			if (res) {
+				const announcements = state.announcements.filter(function(ad) {
+					return ad.id !== id;
+				});
+
+				setState({
+					...state,
+					announcements: announcements
+				});
+
+				alert(res.message);
+			}
 		});
-
-		setState({
-			...state,
-			announcements: announcements
-		})
-
-		alert(response.message);
 	}
 
 	const handleDeleteMass = async function(aIds) {
 		aIds = aIds ?? [];
-		const response = await announcementApi.removeMass(aIds);
-		const announcements = state.announcements.filter(function(ad) {
-			return aIds.indexOf(ad.id) == -1;
+		await announcementApi.removeMass(aIds)
+		.then(function(res) {
+			if (res) {
+				const announcements = state.announcements.filter(function(ad) {
+					return aIds.indexOf(ad.id) == -1;
+				});
+
+				setState({
+					...state,
+					announcements: announcements,
+					selected: []
+				})
+
+				alert(res.message);
+			}
 		});
-
-		setState({
-			...state,
-			announcements: announcements,
-			selected: []
-		})
-
-		alert(response.message);
 	}
 
 	const handleEdit = function(id) {
@@ -91,13 +96,6 @@ export default function Announcements() {
 
 		updateSelectedItems(state.announcements);
 		setCheckAll(checked);
-	}
-
-	const clearSelectedItems = function() {
-		setState({
-			...state,
-			selected: []
-		});
 	}
 
 	const updateSelectedItems = function(aAnnouncements) {
