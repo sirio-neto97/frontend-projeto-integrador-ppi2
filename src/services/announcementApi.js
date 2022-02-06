@@ -37,7 +37,6 @@ export const save = async (data) => {
 		data: data
 	})
 	.then(function(response) {
-		debugger;
 		return response.data;
 	})
 	.catch(function(error) {
@@ -46,7 +45,6 @@ export const save = async (data) => {
 }
 
 export const saveFiles = async (formData, announcementId) => {
-	debugger;
 	return await api({
 		method: 'POST',
 		url: `${route.files}/${announcementId}`,

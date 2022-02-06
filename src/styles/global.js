@@ -9,18 +9,11 @@ export default createGlobalStyle`
 	}
 
 	body, html {
-		background: #383a59;
+		background: #f5f5ff;
+		height: 100%;
 	}
-
-	.btn {
-		border: none;
-		cursor: pointer;
-		padding: 16px 36px;
-		text-transform: uppercase;
-		letter-spacing: 1px;
-		-webkit-transition: all 0.3s;
-		-moz-transition: all 0.3s;
-		transition: all 0.3s;
+	#root {
+		height: 100%;
 	}
 
 	.form-group {

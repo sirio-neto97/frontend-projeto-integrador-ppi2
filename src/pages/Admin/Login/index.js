@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import useAuth from '../../../Context/hooks/useAuth';
 
 import Form from 'react-bootstrap/Form';
@@ -7,6 +8,7 @@ export default function Login() {
 	const initialState = {'email': '', 'password': ''};
 	const [user, setUser] = useState(initialState);
 	const context = useAuth();
+	const navigate = useNavigate();
 
 	const handleChange = function(e) {
 		setUser({
@@ -19,9 +21,8 @@ export default function Login() {
 		e.preventDefault();
 		await context.Login(user)
 		.then(function(res) {
-			debugger;
 			if (res) {
-				console.log(res);
+				return navigate('/admin/announcements');
 			} else {
 				alert('Login ou senha inválidos');
 				setUser(initialState);
@@ -30,8 +31,8 @@ export default function Login() {
 	}
 
 	return (
-		<div className="d-flex justify-content-center">
-			<div className="col-8">
+		<div className="d-flex justify-content-center align-items-center w-100">
+			<div className="col-8 w-100" style={{'maxWidth': '400px'}}>
 				<h1>Login</h1>
 				<fieldset className='border p-5'>
 					<Form onSubmit={handleLogin}>

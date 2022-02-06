@@ -178,8 +178,8 @@ export default function EditAnnouncement() {
 		}
 	}
 
-	useEffect(() => {
-		loadAnnouncementData();
+	useEffect(async () => {
+		await loadAnnouncementData();
 	}, []);
 
 	const isFileToSave = function (objFile) {

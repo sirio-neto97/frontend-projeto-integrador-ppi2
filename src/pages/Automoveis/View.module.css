@@ -1,0 +1,12 @@
+.title {
+	height: 10%;
+}
+
+.attribute {
+	font-size: large;
+	font-weight: bold;
+}
+
+.attribute_value {
+	font-size: medium;
+}

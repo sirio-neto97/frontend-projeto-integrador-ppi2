@@ -141,11 +141,12 @@ export default function Announcements() {
 	return (
 		<>
 			<Title>Cadastro de automóveis</Title>
-			<div className="d-flex justify-content-between mb-3">
-				<Link to={`/admin/announcements/add`} className="btn btn-success">+ Cadastrar</Link>
+			<div className="d-flex flex-row justify-content-between w-100 max-h-10 mb-3">
+				<button className="btn btn-success"><Link to={`/admin/announcements/add`} className="text-decoration-none text-reset">+ Cadastrar</Link></button>
 				<button className={state.buttons.deleteMass.className} title='Excluir selecionados' onClick={() => handleDeleteMass(state.selected)}><BsTrash></BsTrash></button>
 			</div>
-			<List>
+			<List style={{minHeight: '70vh'}}>
+				{state.announcements.lenght ?
 				<li className="header-li">
 					<div className="col-1">
 						<input type="checkbox" name="select-all" id="select-all" onChange={() => handleSelectAll(checkAll)}/>
@@ -155,6 +156,7 @@ export default function Announcements() {
 					<div className="col-3 d-none d-sm-block">Localização</div>
 					<div className="col-1">Ações</div>
 				</li>
+				: <h4>Nenhum veículo cadastrado.</h4>}
 				{state.announcements.map((announcement) => (
 					<li className="list-item" key={announcement.id}>
 						<div className="col-1">

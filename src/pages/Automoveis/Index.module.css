@@ -1,0 +1,14 @@
+.index {
+	width: 100%;
+	min-height: 60vh;
+	background: #fff;
+	border-radius: 4px;
+	padding: 30px;
+	margin:  16px auto;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.div_image {
+	height: 80px;
+	overflow: auto;
+}

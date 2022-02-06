@@ -1,0 +1,35 @@
+.contato {
+	width: 100%;
+	min-height: 60vh;
+	background: #fff;
+	border-radius: 4px;
+	padding: 30px;
+	margin:  16px auto;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+	display: flex;
+	align-items: flex-start;
+	flex-wrap: wrap;
+	flex-direction: column;
+}
+
+.items {
+	margin: 16px;
+}
+
+.attribute {
+	color: #383a59;
+	font-family: sans-serif;
+}
+
+.attribute_value {
+	font-weight: lighter;
+}
+
+h1, h4 {
+	color: #383a59;
+	font-family: sans-serif;
+}
+
+h1 {
+	padding-top: 16px;
+}

@@ -19,7 +19,6 @@ export const Container = styled.div`
 	h1 {
 		color: #383a59;
 		font-family: sans-serif;
-		margin-bottom:32px;
 	}
 `;
 
@@ -50,11 +49,10 @@ export const Form = styled.form`
 `;
 
 export const List = styled.ul`
-	background: #f5f5ff;
+	background: #fff;
 	border-radius: 8px;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
 	list-style: none;
 	padding: 0 16px;
 	width: 100%;
@@ -71,6 +69,7 @@ export const List = styled.ul`
 		margin: 8px 0;
 		border: 1px solid #fff;
 		border-radius: 8px;
+		padding: 8px;
 	}
 
 	li.list-item:hover {
