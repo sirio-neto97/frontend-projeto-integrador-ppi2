@@ -1,4 +1,5 @@
 import axios from 'axios';
+import toast from '../Components/Toast';
 
 const api = axios.create({
 	baseURL: 'http://localhost:3000'
@@ -6,12 +7,17 @@ const api = axios.create({
 
 export const handleError = function(error) {
 	if (error.response) {
-		console.error(error.response.data);
+		toast.error(error.response.data);
 	} else if (error.request) {
-		console.error(error.request);
+		toast.error(error.request);
 	} else {
-		console.error(error.name, error.message);
+		toast.error(error.name, error.message);
 	}
+}
+
+export const handleSuccess = function(message) {
+	message = message ?? 'Operação realizada com sucesso!';
+	return toast.success(message);
 }
 
 export default api;

@@ -10,6 +10,7 @@ import Contato from '../pages/Contato';
 import NotFound from '../pages/NotFound';
 
 import Login from '../pages/Admin/Login';
+import Company from '../pages/Admin/Company';
 import EditAnnouncement from '../pages/Admin/Announcements/edit';
 import CreateAnnouncement from '../pages/Admin/Announcements/create';
 
@@ -28,6 +29,7 @@ export default function AppRoutes() {
 				<Route exact path="/admin/announcements" element={<Announcements />}/>
 				<Route exact path="/admin/announcements/add" element={<CreateAnnouncement />}/>
 				<Route exact path="/admin/announcements/edit/:id" element={<EditAnnouncement />}/>
+				<Route exact path="/admin/company" element={<Company />}/>
 			</Route>
 
 			<Route path="*" element={<NotFound />}/>

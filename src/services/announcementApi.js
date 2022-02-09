@@ -1,4 +1,4 @@
-import api, { handleError } from './api';
+import api, { handleError, handleSuccess } from './api';
 
 const route = {
 	'announcements': '/announcements',
@@ -37,6 +37,7 @@ export const save = async (data) => {
 		data: data
 	})
 	.then(function(response) {
+		handleSuccess('Anúncio salvo com sucesso!');
 		return response.data;
 	})
 	.catch(function(error) {
@@ -64,6 +65,7 @@ export const saveFiles = async (formData, announcementId) => {
 export const remove = async (announcementId) => {
 	return await api.delete(`${route.announcements}/${announcementId}`)
 	.then(function(response) {
+		handleSuccess('Anúncio excluído com sucesso!');
 		return response.data;
 	})
 	.catch(function(error) {
@@ -76,6 +78,7 @@ export const removeMass = async (aIds) => {
 		data: {'ids': aIds}
 	})
 	.then(function(response) {
+		handleSuccess('Anúncios excluídos com sucesso!');
 		return response.data;
 	})
 	.catch(function(error) {

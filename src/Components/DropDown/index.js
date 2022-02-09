@@ -9,7 +9,6 @@ export default function DropDown(props) {
 			drop={props.direction ?? 'down'}
 			title={props.title ?? '...'}
 			variant={props.variant ?? 'outline-success'}
-			size={props.size ?? 'sm'}
 			>
 				{React.Children.map(props.children, function(child) {
 					return (<Dropdown.Item>{React.cloneElement(child)}</Dropdown.Item>);

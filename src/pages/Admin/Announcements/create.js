@@ -35,10 +35,6 @@ export default function CreateAnnouncement() {
 		.then(function(res) {
 			saveAnnouncementFiles(res.id, state.uploadedFiles);
 			return redirectBackPage();
-		})
-		.catch(function(error) {
-			alert(error);
-			return;
 		});
 	}
 

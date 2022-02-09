@@ -53,8 +53,6 @@ export default function Announcements() {
 					...state,
 					announcements: announcements
 				});
-
-				alert(res.message);
 			}
 		});
 	}
@@ -73,8 +71,6 @@ export default function Announcements() {
 					announcements: announcements,
 					selected: []
 				})
-
-				alert(res.message);
 			}
 		});
 	}
@@ -169,7 +165,7 @@ export default function Announcements() {
 
 						<DropDown className="col-1">
 							<Link to={`#`} onClick={() => handleDelete(announcement.id)}>Excluir</Link>
-							<Link to={`/announcement/${announcement.id}`}>Detalhes</Link>
+							<Link to={`/automoveis/${announcement.id}`}>Detalhes</Link>
 						</DropDown>
 					</li>
 				))}

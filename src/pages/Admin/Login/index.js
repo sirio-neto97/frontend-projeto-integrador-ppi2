@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAuth from '../../../Context/hooks/useAuth';
+import toast from '../../../Components/Toast';
 
 import Form from 'react-bootstrap/Form';
 
@@ -19,12 +20,12 @@ export default function Login() {
 
 	const handleLogin = async function(e) {
 		e.preventDefault();
-		await context.Login(user)
+		return context.Login(user)
 		.then(function(res) {
 			if (res) {
 				return navigate('/admin/announcements');
 			} else {
-				alert('Login ou senha inválidos');
+				toast.error('Login ou senha inválidos');
 				setUser(initialState);
 			}
 		});

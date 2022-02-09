@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export const DropDownContainer = styled.div`
 	.dropdown button {
-		height: 16px;
-		width: 16px;
+		height: 24px;
+		width: 32px;
 		display: flex;
 		justify-content: center;
 		align-items: center;

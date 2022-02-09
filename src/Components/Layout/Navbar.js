@@ -39,7 +39,7 @@ function AdminNavbarList() {
 				<Link to="/admin/announcements">Anúncios</Link>
 			</li>
 			<li className={styles.item}>
-				<Link to="/">Dados da empresa</Link>
+				<Link to="/admin/company">Dados da empresa</Link>
 			</li>
 			<li className={styles.item}>
 				<Link to="#" onClick={logout}>Logout</Link>
