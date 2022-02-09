@@ -8,6 +8,23 @@
 	box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
+.filter {
+	padding: 8px;
+	border: 1px solid #f5f5ff;
+	border-radius: 4px;
+}
+
+.filter button {
+	width: 100%;
+	background: #f5f5ff;
+	color: #222;
+}
+
+.filter a {
+	color: #222;
+	text-decoration: none;
+}
+
 .div_image {
 	height: 80px;
 	overflow: auto;

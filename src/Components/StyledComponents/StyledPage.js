@@ -10,6 +10,7 @@ export const Title = styled.h2`
 
 export const Container = styled.div`
 	width: 80%;
+	min-height: 70vh;
 	background: #fff;
 	border-radius: 4px;
 	padding: 30px;

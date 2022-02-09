@@ -12,16 +12,16 @@ export default function CreateAnnouncement() {
 	const navigate = useNavigate();
 	const initialState = {
 		'formInputs': {
-			'marca': 'A',
-			'modelo': 'A',
-			'cor': 'A',
-			'placa': 'A',
-			'localizacao': 'A',
-			'preco': 0.00,
-			'preco_fipe': 0.00,
-			'quilometragem': 0,
-			'ano_modelo': '123',
-			'ano_fabricacao': '123',
+			'marca': 'Fiat',
+			'modelo': 'Palio',
+			'cor': 'Branco',
+			'placa': 'AAA1234',
+			'localizacao': 'BG-RS',
+			'preco': 27000.000,
+			'preco_fipe':32000.000,
+			'quilometragem': 70000,
+			'ano_modelo': '2015',
+			'ano_fabricacao': '2015',
 			'nro_portas': 4,
 			'situacao': 1
 		},
@@ -31,7 +31,7 @@ export default function CreateAnnouncement() {
 
 	const handleSubmit = async function(e) {
 		e.preventDefault();
-		await announcementApi.save(parseDataToSave(state))
+		return await announcementApi.save(parseDataToSave(state))
 		.then(function(res) {
 			saveAnnouncementFiles(res.id, state.uploadedFiles);
 			return redirectBackPage();
@@ -119,62 +119,66 @@ export default function CreateAnnouncement() {
 			<Form onSubmit={handleSubmit} method="post" enctype="multipart/form-data">
 				<div className="form-group w25">
 					<label htmlFor="marca">Marca</label>
-					<input type="text" name="marca" id="marca" value={state.formInputs.marca} onChange={handleChange} required/>
+					<input type="text" className="form-control" name="marca" id="marca" value={state.formInputs.marca} onChange={handleChange} required/>
 				</div>
 
 				<div className="form-group w25">
 					<label htmlFor="modelo">Modelo</label>
-					<input type="text" name="modelo" id="modelo" value={state.formInputs.modelo} onChange={handleChange} required/>
+					<input type="text" className="form-control" name="modelo" id="modelo" value={state.formInputs.modelo} onChange={handleChange} required/>
 				</div>
 
 				<div className="form-group w25">
 					<label htmlFor="cor">Cor</label>
-					<input type="text" name="cor" id="cor" value={state.formInputs.cor} onChange={handleChange} required/>
+					<input type="text" className="form-control" name="cor" id="cor" value={state.formInputs.cor} onChange={handleChange} required/>
 				</div>
 
 				<div className="form-group w25">
 					<label htmlFor="placa">Placa</label>
-					<input type="text" name="placa" id="placa" value={state.formInputs.placa} onChange={handleChange} required/>
+					<input type="text" className="form-control" name="placa" id="placa" value={state.formInputs.placa} onChange={handleChange} required/>
 				</div>
 
 				<div className="form-group w25">
 					<label htmlFor="localizacao">Localização</label>
-					<input type="text" name="localizacao" id="localizacao" value={state.formInputs.localizacao} onChange={handleChange} required/>
+					<input type="text" className="form-control" name="localizacao" id="localizacao" value={state.formInputs.localizacao} onChange={handleChange} required/>
 				</div>
 
 				<div className="form-group w25">
 					<label htmlFor="preco">Preço</label>
-					<input type="text" name="preco" id="preco" value={state.formInputs.preco} onChange={handleChange} required/>
+					<input type="text" className="form-control" name="preco" id="preco" value={state.formInputs.preco} onChange={handleChange} required/>
 				</div>
 
 				<div className="form-group w25">
 					<label htmlFor="preco_fipe">Preço FIPE</label>
-					<input type="text" name="preco_fipe" id="preco_fipe" value={state.formInputs.preco_fipe} onChange={handleChange} required/>
+					<input type="text" className="form-control" name="preco_fipe" id="preco_fipe" value={state.formInputs.preco_fipe} onChange={handleChange} required/>
 				</div>
 
 				<div className="form-group w25">
 					<label htmlFor="quilometragem">Km</label>
-					<input type="number" name="quilometragem" id="quilometragem" value={state.formInputs.quilometragem} onChange={handleChange} required/>
+					<input type="number" className="form-control" name="quilometragem" id="quilometragem" value={state.formInputs.quilometragem} onChange={handleChange} required/>
 				</div>
 
 				<div className="form-group w25">
 					<label htmlFor="ano_modelo">Ano Modelo</label>
-					<input type="number" name="ano_modelo" id="ano_modelo" value={state.formInputs.ano_modelo} onChange={handleChange} required/>
+					<input type="number" className="form-control" name="ano_modelo" id="ano_modelo" value={state.formInputs.ano_modelo} onChange={handleChange} required/>
 				</div>
 
 				<div className="form-group w25">
 					<label htmlFor="ano_fabricacao">Ano Fabricação</label>
-					<input type="number" name="ano_fabricacao" id="ano_fabricacao" value={state.formInputs.ano_fabricacao} onChange={handleChange} required/>
+					<input type="number" className="form-control" name="ano_fabricacao" id="ano_fabricacao" value={state.formInputs.ano_fabricacao} onChange={handleChange} required/>
 				</div>
 
 				<div className="form-group w25">
 					<label htmlFor="nro_portas">Número de Portas</label>
-					<input type="number" name="nro_portas" id="nro_portas" value={state.formInputs.nro_portas} onChange={handleChange} required/>
+					<input type="number" className="form-control" name="nro_portas" id="nro_portas" value={state.formInputs.nro_portas} onChange={handleChange} required/>
 				</div>
 
 				<div className="form-group w25">
 					<label htmlFor="situacao">Situação</label>
-					<input type="text" name="situacao" id="situacao" value={state.formInputs.situacao} onChange={handleChange} required/>
+					<select className="form-control" name="situacao" id="situacao" value={state.formInputs.situacao} onChange={handleChange}>
+						<option value="1">Disponível</option>
+						<option value="2">Vendido</option>
+						<option value="3">Reservado</option>
+					</select>
 				</div>
 
 				<div className="form-group w100">

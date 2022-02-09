@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import { getById } from '../../services/announcementApi';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container } from '../../Components/StyledComponents/StyledPage'
+import { Row, Col } from 'react-bootstrap';
+import { FaWhatsapp } from 'react-icons/fa';
 import styles from './View.module.css';
 
 
@@ -17,6 +19,18 @@ export default function Announcement() {
 		}
 	}
 
+	const getParsedSituation = function(situationId) {
+		switch (situationId) {
+			case 1:
+				return 'Disponível';
+			case 3:
+				return 'Reservado';
+
+			default:
+				return 'Vendido';
+		}
+	}
+
 	useEffect(() => {
 		loadAnnouncement();
 	}, []);
@@ -24,10 +38,9 @@ export default function Announcement() {
 	return (
 		<>
 			<h1 className={styles.title}>{announcement.modelo}</h1>
-
 			<Container className="bg-white">
-				{/* Dados automovel */}
-				<Row>
+				<h4 className="pb-3">Ficha técnica</h4>
+				<Row className="mb-3">
 					<Col>
 						<span className={styles.attribute}>Placa: </span>
 						<span className={styles.attribute_value}>{announcement.placa}</span>
@@ -49,7 +62,7 @@ export default function Announcement() {
 						<span className={styles.attribute_value}>{announcement.quilometragem}</span>
 					</Col>
 				</Row>
-				<Row>
+				<Row className="mb-3">
 					<Col>
 						<span className={styles.attribute}>Ano Modelo: </span>
 						<span className={styles.attribute_value}>{announcement.ano_modelo}</span>
@@ -63,28 +76,42 @@ export default function Announcement() {
 						<span className={styles.attribute_value}>{announcement.localizacao}</span>
 					</Col>
 					<Col>
+						<span className={styles.attribute}>Situação: </span>
+						<span className={styles.attribute_value}>{getParsedSituation(announcement.situacao)}</span>
+					</Col>
+				</Row>
+				<Row className="border-bottom pb-5">
+					<Col sm={3}>
 						<span className={styles.attribute}>Preço FIPE: </span>
 						<span className={styles.attribute_value}>{announcement.preco_fipe}</span>
 					</Col>
-					<Col>
+					<Col sm={3}>
 						<span className={styles.attribute}>Preço Repasse: </span>
 						<span className={styles.attribute_value}>{announcement.preco}</span>
 					</Col>
-					<Col>
-						<span className={styles.attribute}>Situação: </span>
-						<span className={styles.attribute_value}>{announcement.situacao}</span>
-					</Col>
 				</Row>
 
-				{/* Imagens automovel */}
+				<Row className="mt-3">
+					<h4 className="pb-3">Imagens</h4>
+					{announcement.images && announcement.images[0] ?
+						announcement.images.map((image) => (
+							<Col sm={2}>
+								<div className={styles.image}>
+									<img src={image.path} alt="" />
+								</div>
+							</Col>
+						))
+					: <p>Nenhuma imagem registrada..</p>}
+				</Row>
 				<Row>
 					<Col>
-					{/*  */}
+						<button onClick={() => navigate(-1)} className="btn btn-danger">Voltar</button>
+					</Col>
+					<Col>
+						<button onClick={() => navigate(-1)} className="btn btn-success"><FaWhatsapp/>  Chame-nos já!</button>
 					</Col>
 				</Row>
-				<button onClick={() => navigate(-1)} className="btn btn-danger">Voltar</button>
 			</Container>
-
 		</>
 	);
 }

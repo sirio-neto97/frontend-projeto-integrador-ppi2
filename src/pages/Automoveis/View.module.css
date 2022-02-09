@@ -10,3 +10,15 @@
 .attribute_value {
 	font-size: medium;
 }
+
+.image {
+	margin-bottom: 32px;
+	display: flex;
+	margin-right: 16px;
+	align-items: center;
+	width: 132px;
+}
+
+.image img {
+	width: 100%;
+}
